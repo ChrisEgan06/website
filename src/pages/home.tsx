@@ -1,127 +1,240 @@
 // src/pages/home.tsx
-// This is the main landing page for the site.
-// If you want to change the text, image, or name animation,
-// start here and edit the constants near the top.
+
 import { Link } from "react-router-dom";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import headshot from "../assets/headshot.jpg";
 
-// ---- Content you can tweak quickly ------------------------------------
-// Keep the text here so it is easy to edit later without digging through JSX.
+/* -------------------------------------------------------------------------- */
+/*                               PAGE CONTENT                                 */
+/* -------------------------------------------------------------------------- */
+
 const siteName = "Christopher Egan";
 const siteSubtitle = "Computer Science & Robotics Engineering @ WPI";
-const pastelNameColors = ["#8fdcff", "#c7b0ff", "#f8c8a8", "#bfe9cc", "#f7b6cf"];
+
+const pastelNameColors = [
+  "#8fdcff",
+  "#c7b0ff",
+  "#f8c8a8",
+  "#bfe9cc",
+  "#f7b6cf",
+];
+
+/* -------------------------------------------------------------------------- */
+/*                              HOME COMPONENT                                */
+/* -------------------------------------------------------------------------- */
 
 function Home() {
-  // ---- State -----------------------------------------------------------
-  // These control the small interactions on the page.
-  const [isAvatarHovered, setIsAvatarHovered] = useState(false);
-  const [hoveredLetterIndex, setHoveredLetterIndex] = useState<number | null>(null);
-  const [fallenLetterIndexes, setFallenLetterIndexes] = useState<boolean[]>(() => Array(siteName.length).fill(false));
+  /* ------------------------------------------------------------------------ */
+  /*                                  STATE                                   */
+  /* ------------------------------------------------------------------------ */
 
+  // Controls the subtle hover effect on the profile picture.
+  const [isAvatarHovered, setIsAvatarHovered] = useState(false);
+
+  // Stores the index of the name letter currently being hovered.
+  const [hoveredLetterIndex, setHoveredLetterIndex] = useState<number | null>(
+    null
+  );
+
+  // Keeps track of letters that have been clicked and animated away.
+  const [fallenLetterIndexes, setFallenLetterIndexes] = useState<boolean[]>(
+    () => Array(siteName.length).fill(false)
+  );
+
+  /* ------------------------------------------------------------------------ */
+  /*                            DERIVED VALUES                                */
+  /* ------------------------------------------------------------------------ */
+
+  // Split the name into individual characters so each letter can be animated.
   const nameLetters = siteName.split("");
 
-  // ---- Helper functions -----------------------------------------------
-  // This creates a random-ish fling path for each letter when it is clicked.
+  /* ------------------------------------------------------------------------ */
+  /*                            HELPER FUNCTIONS                              */
+  /* ------------------------------------------------------------------------ */
+
+  /**
+   * Generates the final position of a letter after it is clicked.
+   *
+   * The calculation is based on the letter index, making the animation
+   * deterministic rather than changing every time the component renders.
+   */
   const getFlingOffset = (index: number) => {
     const angle = (index % 11) * 0.62 + (index % 3) * 0.35 + 0.15;
     const distance = 220 + ((index * 53) % 140);
-    const x = Math.cos(angle) * distance;
-    const y = Math.sin(angle) * distance - 40;
 
-    return { x, y };
+    return {
+      x: Math.cos(angle) * distance,
+      y: Math.sin(angle) * distance - 40,
+    };
   };
-  // ---- Event handler --------------------------------------------------
-  // This is intentionally empty because the page is mostly static.
-  const handleMove = useCallback(() => {
-    // no-op; kept here so the page stays easy to expand later
-  }, []);
+
+  /**
+   * Marks a letter as fallen when it is clicked.
+   */
+  const handleLetterClick = (index: number) => {
+    setFallenLetterIndexes((previous) => {
+      const next = [...previous];
+      next[index] = true;
+
+      return next;
+    });
+  };
+
+  /* ------------------------------------------------------------------------ */
+  /*                                  RENDER                                  */
+  /* ------------------------------------------------------------------------ */
 
   return (
-    <main
-      onMouseMove={handleMove}
-      className="relative min-h-screen overflow-hidden px-6 py-6 text-slate-100 sm:px-8 lg:px-10 page-fade"
-    >
-      {/* ---- Main content column ---------------------------------------- */}
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-3xl flex-col justify-center pt-2 sm:pt-0">
-        {/* ---- Top row: image + name + subtitle --------------------------- */}
-        <div className="mb-5 flex items-center justify-start gap-4">
-          {/* Profile image block */}
+    /*
+     * The navbar is fixed and therefore does not affect this layout.
+     *
+     * min-h-screen makes this exactly one viewport tall.
+     *
+     * flex + items-center + justify-center puts the entire homepage
+     * content group directly in the center of the screen.
+     */
+    <main className="flex min-h-screen items-center justify-center px-6 text-slate-100 page-fade sm:px-8 lg:px-10">
+
+      {/* ------------------------------------------------------------------ */}
+      {/*                         CENTERED CONTENT                            */}
+      {/* ------------------------------------------------------------------ */}
+
+      <div className="w-full max-w-3xl">
+
+        {/* -------------------------------------------------------------- */}
+        {/*                         PROFILE HEADER                          */}
+        {/* -------------------------------------------------------------- */}
+
+        {/*
+         * The profile picture and name form one horizontal group.
+         *
+         * justify-center centers that entire group horizontally.
+         */}
+        <div className="flex items-center justify-center gap-5">
+
+          {/* ------------------------------------------------------------ */}
+          {/*                         PROFILE IMAGE                         */}
+          {/* ------------------------------------------------------------ */}
+
           <div
+            className="shrink-0"
             onMouseEnter={() => setIsAvatarHovered(true)}
             onMouseLeave={() => setIsAvatarHovered(false)}
-            style={{ position: "relative", display: "inline-block" }}
           >
-            {/* Soft glow behind the avatar */}
-            <div
-              aria-hidden
-              style={{
-                position: "absolute",
-                inset : "-8px",
-                borderRadius: 999,
-                filter: "blur(14px)",
-                background: "radial-gradient(circle at 30% 20%, rgba(61,217,235,0.12), transparent 30%)",
-                opacity: isAvatarHovered ? 1 : 0,
-                transform: isAvatarHovered ? "translateY(-2px)" : "translateY(0)",
-                transition: "opacity 240ms ease, transform 240ms ease",
-                pointerEvents: "none",
-              }}
-            />
-
-            {/* Headshot image. Swap this file later by replacing the import at the top. */}
             <img
               src={headshot}
               alt="Christopher Egan"
-              className="h-24 w-24 rounded-full object-cover ring-1 ring-white/8 sm:h-28 sm:w-28"
+              className="
+                h-24
+                w-24
+                rounded-full
+                object-cover
+                ring-1
+                ring-white/8
+                sm:h-28
+                sm:w-28
+              "
               style={{
+                // Smoothly animate the hover effect.
                 transition: "transform 220ms ease, box-shadow 220ms ease",
-                transform: isAvatarHovered ? "translateY(-3px)" : undefined,
-                boxShadow: isAvatarHovered ? "0 12px 36px rgba(7,10,14,0.65)" : undefined,
+
+                // Move the image slightly upward while hovered.
+                transform: isAvatarHovered
+                  ? "translateY(-3px)"
+                  : undefined,
+
+                // Add a subtle shadow while hovered.
+                boxShadow: isAvatarHovered
+                  ? "0 12px 36px rgba(7,10,14,0.65)"
+                  : undefined,
+
                 display: "block",
               }}
             />
           </div>
 
-          {/* Name + subtitle */}
-          <div className="mt-1 space-y-1.5">
-            <h1 className="wallpoet-font text-4xl font-semibold tracking-[-0.03em] text-white sm:text-5xl">
-              {nameLetters.map((letter, index) => {
-                // Spaces are rendered as invisible blocks so the letters keep the right flow.
-            if (letter === " ") {
-              return (
-                <span
-                  key={`${letter}-${index}`}
-                  style={{ display: "inline-block", width: "0.45em" }}
-                />
-              );
-            }
+          {/* ------------------------------------------------------------ */}
+          {/*                            NAME                                */}
+          {/* ------------------------------------------------------------ */}
 
+          <div className="text-left">
+            <h1
+              className="
+                wallpoet-font
+                text-4xl
+                font-semibold
+                tracking-[-0.03em]
+                text-white
+                sm:text-5xl
+              "
+            >
+              {nameLetters.map((letter, index) => {
+                /*
+                 * Render spaces separately so they do not interfere
+                 * with the individual letter animations.
+                 */
+                if (letter === " ") {
+                  return (
+                    <span
+                      key={`space-${index}`}
+                      aria-hidden="true"
+                      style={{
+                        display: "inline-block",
+                        width: "0.45em",
+                      }}
+                    />
+                  );
+                }
+
+                // Determine whether this letter has been clicked.
                 const isFallen = fallenLetterIndexes[index];
+
+                // Determine whether this letter is currently hovered.
                 const isHovered = hoveredLetterIndex === index;
+
+                // Calculate the letter's fling direction.
                 const flingOffset = getFlingOffset(index);
-                const color = pastelNameColors[index % pastelNameColors.length];
+
+                // Give each letter a repeating pastel color.
+                const color =
+                  pastelNameColors[index % pastelNameColors.length];
 
                 return (
                   <span
                     key={`${letter}-${index}`}
-                    onClick={() =>
-                      setFallenLetterIndexes((previous) => {
-                        const next = [...previous];
-                        next[index] = true;
-                        return next;
-                      })
-                    }
+                    onClick={() => handleLetterClick(index)}
                     onMouseEnter={() => setHoveredLetterIndex(index)}
                     onMouseLeave={() => setHoveredLetterIndex(null)}
-                    className={`mr-[0.04em] inline-block cursor-pointer select-none ${isFallen ? "name-letter-fling" : ""}`}
+                    className={`
+                      mr-[0.04em]
+                      inline-block
+                      cursor-pointer
+                      select-none
+                      ${isFallen ? "name-letter-fling" : ""}
+                    `}
                     style={{
-                      display: "inline-block",
+                      // Smooth hover movement.
                       transition: "transform 240ms ease",
-                      animationDelay: isFallen ? `${index * 20}ms` : undefined,
-                      transform: isFallen ? undefined : isHovered ? "translateY(-2px)" : "translateY(0)",
-                      opacity: 1,
+
+                      // Slightly stagger each falling letter.
+                      animationDelay: isFallen
+                        ? `${index * 20}ms`
+                        : undefined,
+
+                      // Lift the letter slightly on hover.
+                      transform: isFallen
+                        ? undefined
+                        : isHovered
+                          ? "translateY(-2px)"
+                          : "translateY(0)",
+
+                      // Apply the pastel letter color.
                       color,
+
+                      // Hint to the browser that these properties animate.
                       willChange: "transform, opacity",
+
+                      // Values consumed by the CSS fling animation.
                       ["--x" as string]: `${flingOffset.x}px`,
                       ["--y" as string]: `${flingOffset.y}px`,
                     }}
@@ -131,44 +244,87 @@ function Home() {
                 );
               })}
             </h1>
-            <p className="mt-5 text-[0.95rem] text-slate-400 tracking-wide font-medium pixel-font">{siteSubtitle}</p>
+
+            {/* ---------------------------------------------------------- */}
+            {/*                           SUBTITLE                           */}
+            {/* ---------------------------------------------------------- */}
+
+            <p
+              className="
+                pixel-font
+                mt-3
+                text-[0.9rem]
+                font-medium
+                tracking-wide
+                text-slate-400
+              "
+            >
+              {siteSubtitle}
+            </p>
           </div>
         </div>
 
-        {/* ---- Intro paragraph ------------------------------------------- */}
-        <div className="relative max-w-[65ch]">
-          <p className="relative z-10 text-[1.12rem] leading-8 font-light text-slate-300 sm:text-lg">
+        {/* -------------------------------------------------------------- */}
+        {/*                         INTRODUCTION                             */}
+        {/* -------------------------------------------------------------- */}
+
+        {/*
+         * This paragraph sits underneath the profile header.
+         *
+         * mx-auto keeps the paragraph itself centered within the
+         * maximum content width.
+         */}
+        <div className="mx-auto mt-10 max-w-[65ch] text-center">
+          <p
+            className="
+              text-[1.05rem]
+              font-light
+              leading-8
+              text-slate-300
+              sm:text-lg
+            "
+          >
             {"Hi! I'm a junior at WPI studying Robotics Engineering & Computer Science. "}
+
             {"Take a look at some of my "}
+
             <Link to="/projects" className="animated-link">
               projects
             </Link>
+
             {", learn more about my "}
+
             <Link to="/experience" className="animated-link">
               experience
             </Link>
+
             {", or browse a few of my "}
+
             <Link to="/hobbies" className="animated-link">
               hobbies
             </Link>
+
             {" outside of engineering. "}
-            {"If you'd like to know more, feek free ti "}
+
+            {"If you'd like to know more, feel free to view my "}
+
             <a href="/resume.pdf" className="animated-link">
               resume
             </a>
+
             {" or "}
-            <a href="mailto:christopher@example.com" className="animated-link">
-              contac
+
+            <a
+              href="mailto:christopher@example.com"
+              className="animated-link"
+            >
+              contact
             </a>
+
             {" me."}
           </p>
         </div>
       </div>
-
-      {/*
-        If you want to add more polish later, this is the place to do it.
-        For example: a new animation, a small shape behind the text, or a different accent.
-      */}
     </main>
   );
 }
