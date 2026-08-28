@@ -32,7 +32,7 @@ const projects = [
     description:
       "Collision checking using Euclidean Signed Distance Fields to evaluate obstacle clearance in reconstructed environments.",
     tech: "Python · Open3D · NumPy",
-    image: "/projects/esdf-collision.jpg",
+    image: "/projects/collision.jpg",
 
     // Standard project image.
     imageFit: "cover",

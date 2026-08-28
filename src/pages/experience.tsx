@@ -1,3 +1,7 @@
+/**
+ * Experience page
+ * Displays a chronological list of current work experiences
+ */
 const experiences = [
   {
     date: "AUG 2026 — PRESENT",
@@ -30,7 +34,6 @@ function Experience() {
           <h1 className="wallpoet-font mt-3 text-4xl text-white sm:text-5xl">
             Experience
           </h1>
-
           <p className="mt-5 max-w-xl text-sm leading-7 text-slate-400">
             Things I'm currently working on.
           </p>
@@ -56,11 +59,9 @@ function Experience() {
                 <h2 className="text-xl font-medium text-white">
                   {experience.role}
                 </h2>
-
                 <p className="mt-1 text-sm text-cyan-300/80">
                   {experience.organization}
                 </p>
-
                 <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-400">
                   {experience.description}
                 </p>

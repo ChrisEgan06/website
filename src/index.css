@@ -3,8 +3,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Audiowide&display=swap");
 @import "tailwindcss";
 
-
-
 @layer base {
   html {
     font-size: 16px;
@@ -12,95 +10,48 @@
     background-color: #121212;
   }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 999;
-
-  background:
-    repeating-linear-gradient(
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+    background: repeating-linear-gradient(
       to bottom,
       transparent 0px,
       transparent 2px,
       rgba(68, 68, 68, 0.6) 4px
     );
+    opacity: 0.35;
+  }
 
-  opacity: .35;
-}
-
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 998;
-
-  background:
-    radial-gradient(
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 998;
+    background: radial-gradient(
       ellipse at center,
       transparent 55%,
-      rgba(72, 71, 71, 0.45) 100%
+      rgba(1, 1, 1, 0.45) 100%
     );
-}
+  }
 
   h1 {
     font-family: "Space Grotesk", "Inter", sans-serif;
   }
 
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
-  }
-
-  .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-        background-image: radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px);
-        background-size: 20px 20px;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
+    --accent: #3dd9eb;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-  }
-
-  * {
-        --accent: #3dd9eb;
+    --radius: 0.5rem;
   }
 
   #root {
@@ -113,15 +64,10 @@ body::after {
   }
 }
 
-/*
- * Shared page container.
- *
- * This is intentionally used by both the navbar and page content
- * so their left and right edges always line up.
- */
+/* Page container - used by navbar and content for alignment */
 .site-container {
   width: 100%;
-  max-width: 64rem; /* Tailwind max-w-5xl */
+  max-width: 64rem;
   margin-left: auto;
   margin-right: auto;
   padding-left: 1.5rem;
@@ -142,16 +88,23 @@ body::after {
   }
 }
 
-/* Fade in for subtle entrance */
+/* Page fade-in animation */
 .page-fade {
   animation: pageFade 420ms ease both;
 }
 
 @keyframes pageFade {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
+/* Letter fling animation */
 @keyframes nameFling {
   0% {
     transform: translate(0, 0) rotate(0deg) scale(1);
@@ -168,22 +121,13 @@ body::after {
   animation: nameFling 900ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
-:root {
-  --accent: #8fdcff;
-  --accent-2: #c7b0ff;
-}
-
-.text-accent { color: var(--accent); }
-
+/* Link styling with smooth transitions */
 .animated-link {
   display: inline-block;
-  color: rgb(61, 217, 235); /* or whatever your accent color is */
+  color: rgb(61, 217, 235);
   text-decoration: none;
   border-bottom: 1px solid transparent;
-  transition:
-    border-bottom-color 180ms ease,
-    color 180ms ease,
-    transform 180ms ease;
+  transition: border-bottom-color 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
 .animated-link:hover {
@@ -191,8 +135,9 @@ body::after {
   border-bottom-color: rgba(61, 217, 235, 0.8);
   transform: translateY(-1px);
   font-weight: 500;
-
 }
+
+/* Font utilities */
 .pixel-font {
   font-family: "Pixelify Sans", sans-serif;
 }
