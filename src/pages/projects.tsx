@@ -39,28 +39,26 @@ const projects = [
   },
 
   {
-    slug: "attitude-estimation-simulation",
+    slug: "pose-estimation-simulation",
     category: "STATE ESTIMATION",
-    title: "Attitude Estimation — Simulation",
+    title: "Pose Estimation — Simulation",
     description:
-      "A quaternion-based Multiplicative Extended Kalman Filter developed and tested in MATLAB and Simulink.",
+      "Quaternion-based multiplicative extended Kalman filter fusing multiple sensors for 6-DoF state estimation in autonomous rocket guidance simulation.",
     tech: "MATLAB · Simulink · MEKF · Quaternions",
-    image: "/projects/attitude-sim.jpg",
+    image: "/projects/sim.jpg",
 
-    // Standard project image.
     imageFit: "cover",
   },
 
   {
-    slug: "attitude-estimation-embedded",
+    slug: "pose-estimation-embedded",
     category: "EMBEDDED SYSTEMS",
-    title: "Attitude Estimation — Embedded",
+    title: "Pose Estimation — Embedded",
     description:
-      "An embedded implementation of the attitude estimator running on an STM32H7 and integrating multiple sensors.",
+      "Quaternion-based multiplicative extended Kalman filter implementation on STM32H7 for real-time 6-DoF attitude estimation and autonomous rocket guidance.",
     tech: "C++ · STM32H7 · IMU · Magnetometer · Barometer",
-    image: "/projects/attitude-embedded.jpg",
+    image: "/projects/embedded.jpg",
 
-    // Standard project image.
     imageFit: "cover",
   },
 
@@ -69,11 +67,10 @@ const projects = [
     category: "SENSOR CHARACTERIZATION",
     title: "Allan Variance Analysis",
     description:
-      "A sensor-analysis script used to characterize IMU noise and estimate parameters for state estimation.",
-    tech: "Python · NumPy · Matplotlib · IMU",
-    image: "/projects/allan-variance.jpg",
+      "C++ and Python tools for dual-IMU data acquisition and Allan variance analysis to characterize sensor noise for state estimation systems.",
+    tech: "C++ · Python · NumPy · Matplotlib · STM32H7",
+    image: "/projects/allan.png",
 
-    // Standard project image.
     imageFit: "cover",
   },
 ];
@@ -101,7 +98,7 @@ function Projects() {
           </h1>
 
           {/* Page description */}
-          <p className="mt-5 max-w-xl text-sm leading-7 text-slate-400">
+          <p className="mt-5 max-w-xl text-sm leading-7 text-slate-400 text-justify">
             Robotics, perception, and state estimation projects.
           </p>
         </header>
@@ -186,7 +183,7 @@ function Projects() {
                   </h2>
 
                   {/* Project description */}
-                  <p className="mt-3 text-sm leading-6 text-slate-400">
+                  <p className="mt-3 text-sm leading-6 text-slate-400 text-justify">
                     {project.description}
                   </p>
 

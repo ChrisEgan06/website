@@ -128,7 +128,7 @@ function Home() {
 
         {/* Introduction Section */}
         <div className="mx-auto mt-10 max-w-[65ch] text-center">
-          <p className="text-[1.05rem] font-light leading-8 text-slate-300 sm:text-lg">
+          <p className="text-[1.05rem] font-light leading-8 text-slate-300 text-justify sm:text-lg">
             {"Hi! I'm a junior at WPI studying Robotics Engineering & Computer Science. "}
 
             {"Take a look at some of my "}

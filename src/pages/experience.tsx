@@ -19,7 +19,7 @@ const experiences = [
   },
   {
     date: "AUG 2025 — PRESENT",
-    role: "GNC",
+    role: "Guidance, Navigation & Control",
     organization: "HPRC",
     description:
       "Working on guidance, navigation, and control systems for high-power rocketry, including state estimation and embedded flight systems.",
@@ -34,7 +34,7 @@ function Experience() {
           <h1 className="wallpoet-font mt-3 text-4xl text-white sm:text-5xl">
             Experience
           </h1>
-          <p className="mt-5 max-w-xl text-sm leading-7 text-slate-400">
+          <p className="mt-5 max-w-xl text-sm leading-7 text-slate-400 text-justify">
             Things I'm currently working on.
           </p>
         </header>
@@ -62,7 +62,7 @@ function Experience() {
                 <p className="mt-1 text-sm text-cyan-300/80">
                   {experience.organization}
                 </p>
-                <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-400">
+                <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-400 text-justify">
                   {experience.description}
                 </p>
               </div>

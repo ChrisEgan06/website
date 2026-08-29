@@ -13,6 +13,7 @@ const projects = {
     tech: "Python · Nerfstudio · Open3D · NumPy",
     overview:
       "I built a pipeline that converts metrically scaled Gaussian-splat reconstructions into ESDFs that can be used by robotic systems for path planning, collision checking, and obstacle-clearance queries. The resulting ESDF was also integrated into an RRT path-planning system.",
+    video: undefined,
     presentation:
       "https://docs.google.com/presentation/d/e/2PACX-1vRIY92SAq4L5dgpn6jMRcZwwAhFbtvGkFAtDRQiqjmv4pOoUdlUUW_OTfB74QTf0Q7CDPBJrvkR-LAp/pubembed?start=false&loop=false&delayms=3000",
   },
@@ -25,29 +26,32 @@ const projects = {
     tech: "Python · Open3D · NumPy",
     overview:
       "Developed collision-checking methods using an ESDF representation to determine obstacle proximity and clearance for robotic systems.",
+    video: undefined,
     presentation:
       "https://docs.google.com/presentation/d/e/2PACX-1vRy-PILR0y6zbEfe7uRxogX8M9GhWSd8Cl5EkrvbHmKKiXlpXVP21mfI2vTsB2444AMTCANvOFbGpsL/pubembed?start=false&loop=false&delayms=3000",
   },
 
-  "attitude-estimation-simulation": {
+  "pose-estimation-simulation": {
     category: "STATE ESTIMATION",
-    title: "Attitude Estimation — Simulation",
+    title: "Pose Estimation — Simulation",
     description:
-      "A quaternion-based Multiplicative Extended Kalman Filter developed and tested in MATLAB and Simulink.",
+      "Quaternion-based multiplicative extended Kalman filter fusing multiple sensors for 6-DoF state estimation in autonomous rocket guidance simulation.",
     tech: "MATLAB · Simulink · MEKF · Quaternions",
     overview:
-      "Developed and tested a quaternion-based Multiplicative Extended Kalman Filter for attitude estimation in simulation.",
+      "Developed and tested a quaternion-based multiplicative extended Kalman filter (QM-EKF) that fused dual IMUs, GPS, barometer, and magnetometer measurements to estimate full 6-DoF vehicle state for autonomous rocket guidance in MATLAB/Simulink flight simulation.",
+    video: undefined,
     presentation: undefined,
   },
 
-  "attitude-estimation-embedded": {
+  "pose-estimation-embedded": {
     category: "EMBEDDED SYSTEMS",
-    title: "Attitude Estimation — Embedded",
+    title: "Pose Estimation — Embedded",
     description:
-      "An embedded implementation of the attitude estimator running on an STM32H7 and integrating multiple sensors.",
+      "Quaternion-based multiplicative extended Kalman filter implementation on STM32H7 for real-time 6-DoF attitude estimation and autonomous rocket guidance.",
     tech: "C++ · STM32H7 · IMU · Magnetometer · Barometer",
     overview:
-      "Integrated the attitude-estimation system into an embedded flight computer and implemented the estimator for real-time execution on an STM32H7.",
+      "Ported the QM-EKF to C++ on an STM32H7 microcontroller for a planned supersonic flight with an anticipated apogee of 10,000 feet. Implemented real-time sensor fusion and state estimation for autonomous rocket guidance using canards for stabilization.",
+    video: "/projects/embedded-demo.mov",
     presentation: undefined,
   },
 
@@ -55,10 +59,11 @@ const projects = {
     category: "SENSOR CHARACTERIZATION",
     title: "Allan Variance Analysis",
     description:
-      "A Python-based analysis tool for characterizing IMU noise and estimating parameters used by the attitude estimator.",
-    tech: "Python · NumPy · Matplotlib · IMU",
+      "C++ and Python tools for dual-IMU data acquisition and Allan variance analysis to characterize sensor noise for state estimation systems.",
+    tech: "C++ · Python · NumPy · Matplotlib · STM32H7",
     overview:
-      "Created a script for analyzing long-duration IMU recordings and characterizing the sensor noise used to inform the attitude-estimation system.",
+      "Developed software to interface with two IMUs on an STM32H7 microcontroller and collect 7 hours of synchronized sensor data. Implemented Allan variance analysis to characterize IMU noise and estimate parameters for the QM-EKF noise matrix.",
+    video: undefined,
     presentation: undefined,
   },
 };
@@ -99,7 +104,7 @@ function ProjectDetail() {
           <h1 className="wallpoet-font mt-3 text-4xl text-white sm:text-5xl">
             {project.title}
           </h1>
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-400">
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-400 text-justify">
             {project.description}
           </p>
           <p className="mt-6 font-mono text-xs text-slate-500">
@@ -109,15 +114,35 @@ function ProjectDetail() {
 
         <section className="mt-12 max-w-3xl">
           <h2 className="text-xl font-medium text-white">Overview</h2>
-          <p className="mt-4 leading-8 text-slate-400">
+          <p className="mt-4 leading-8 text-slate-400 text-justify">
             {project.overview}
           </p>
         </section>
 
+        {project.video && (
+          <section className="mt-16 border-t border-white/10 pt-12">
+            <h2 className="text-xl font-medium text-white">Demo</h2>
+            <p className="mt-4 max-w-2xl leading-7 text-slate-400 text-justify">
+              Live demonstration of the system in action.
+            </p>
+            <div className="mt-8 aspect-video w-full overflow-hidden border border-white/10 bg-[#0b0d10]">
+              <video
+                src={project.video}
+                title={`${project.title} demo`}
+                className="h-full w-full"
+                controls
+                autoPlay
+                muted
+                loop
+              />
+            </div>
+          </section>
+        )}
+
         {project.presentation && (
           <section className="mt-16 border-t border-white/10 pt-12">
             <h2 className="text-xl font-medium text-white">Presentation</h2>
-            <p className="mt-4 max-w-2xl leading-7 text-slate-400">
+            <p className="mt-4 max-w-2xl leading-7 text-slate-400 text-justify">
               A detailed walkthrough of the project, implementation, and
               results.
             </p>

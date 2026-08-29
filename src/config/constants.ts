@@ -38,6 +38,7 @@ export const NAVIGATION_LINKS = [
   { label: "Home", path: "/" },
   { label: "Projects", path: "/projects" },
   { label: "Experience", path: "/experience" },
+  { label: "Hobbies", path: "/hobbies" },
 ];
 
 export const ANIMATION_TIMINGS = {
