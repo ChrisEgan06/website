@@ -14,8 +14,8 @@ const projects = [
     category: "PERCEPTION",
     title: "Gaussian Splat to ESDF Pipeline",
     description:
-      "A pipeline for converting Gaussian-splat reconstructions into voxelized environments and ESDFs for robotic applications.",
-    tech: "Python · Nerfstudio · Open3D · NumPy",
+      "A pipeline for converting Gaussian-splat reconstructions into Euclidean Signed Distance Fields for robotic applications.",
+    tech: "Python · Nerfstudio · Open3D · Pandas · NumPy",
     image: "/projects/pipeline.jpg",
 
     /*

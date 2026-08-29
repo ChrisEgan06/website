@@ -12,7 +12,7 @@ const projects = {
       "An end-to-end pipeline for converting metric Gaussian splats into Euclidean Signed Distance Fields for robotic applications.",
     tech: "Python · Nerfstudio · Open3D · NumPy",
     overview:
-      "I built a pipeline that converts metrically scaled Gaussian-splat reconstructions into ESDFs that can be used by robotic systems for path planning, collision checking, and obstacle-clearance queries. The resulting ESDF was also integrated into an RRT path-planning system.",
+      "I built a pipeline that converts metrically scaled Gaussian-splats into ESDFs that can be used by robotic systems for path planning, collision checking in reinforcement learning, and obstacle-clearance queries. The resulting ESDF was also integrated into an RRT path-planning system.",
     video: undefined,
     presentation:
       "https://docs.google.com/presentation/d/e/2PACX-1vRIY92SAq4L5dgpn6jMRcZwwAhFbtvGkFAtDRQiqjmv4pOoUdlUUW_OTfB74QTf0Q7CDPBJrvkR-LAp/pubembed?start=false&loop=false&delayms=3000",
@@ -25,7 +25,7 @@ const projects = {
       "Collision checking using Euclidean Signed Distance Fields to evaluate obstacle clearance in reconstructed environments.",
     tech: "Python · Open3D · NumPy",
     overview:
-      "Developed collision-checking methods using an ESDF representation to determine obstacle proximity and clearance for robotic systems.",
+      "Applied collision-checking methods using an ESDF to determine obstacle proximity and clearance for robotic systems.",
     video: undefined,
     presentation:
       "https://docs.google.com/presentation/d/e/2PACX-1vRy-PILR0y6zbEfe7uRxogX8M9GhWSd8Cl5EkrvbHmKKiXlpXVP21mfI2vTsB2444AMTCANvOFbGpsL/pubembed?start=false&loop=false&delayms=3000",
@@ -38,7 +38,7 @@ const projects = {
       "Quaternion-based multiplicative extended Kalman filter fusing multiple sensors for 6-DoF state estimation in autonomous rocket guidance simulation.",
     tech: "MATLAB · Simulink · MEKF · Quaternions",
     overview:
-      "Developed and tested a quaternion-based multiplicative extended Kalman filter (QM-EKF) that fused dual IMUs, GPS, barometer, and magnetometer measurements to estimate full 6-DoF vehicle state for autonomous rocket guidance in MATLAB/Simulink flight simulation.",
+      "Developed and tested a quaternion-based multiplicative extended Kalman filter that fused dual IMUs, GPS, barometer, and magnetometer measurements to estimate full 6-DoF state for autonomous rocket guidance in MATLAB/Simulink flight simulation.",
     video: undefined,
     presentation: undefined,
   },
@@ -50,7 +50,7 @@ const projects = {
       "Quaternion-based multiplicative extended Kalman filter implementation on STM32H7 for real-time 6-DoF attitude estimation and autonomous rocket guidance.",
     tech: "C++ · STM32H7 · IMU · Magnetometer · Barometer",
     overview:
-      "Ported the QM-EKF to C++ on an STM32H7 microcontroller for a planned supersonic flight with an anticipated apogee of 10,000 feet. Implemented real-time sensor fusion and state estimation for autonomous rocket guidance using canards for stabilization.",
+      "Ported the MEKF to C++ on an STM32H7 microcontroller for a planned supersonic flight with an anticipated apogee of 10,000 feet. Implemented real-time sensor fusion and state estimation for autonomous rocket guidance using canards for stabilization.",
     video: "/projects/embedded-demo.mov",
     presentation: undefined,
   },
@@ -62,7 +62,7 @@ const projects = {
       "C++ and Python tools for dual-IMU data acquisition and Allan variance analysis to characterize sensor noise for state estimation systems.",
     tech: "C++ · Python · NumPy · Matplotlib · STM32H7",
     overview:
-      "Developed software to interface with two IMUs on an STM32H7 microcontroller and collect 7 hours of synchronized sensor data. Implemented Allan variance analysis to characterize IMU noise and estimate parameters for the QM-EKF noise matrix.",
+      "Developed software to interface with two IMUs on an STM32H7 microcontroller and collect 7 hours of synchronized sensor data. Implemented Allan variance analysis to characterize IMU noise and estimate parameters for the MEKF noise matrix.",
     video: undefined,
     presentation: undefined,
   },
