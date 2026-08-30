@@ -5,7 +5,7 @@ import Experience from "./pages/experience";
 import Hobbies from "./pages/hobbies";
 import ProjectDetail from "./pages/project-detail";
 import Navbar from "./components/navbar";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/react"
 
 /**
  * Main App component
