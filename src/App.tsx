@@ -5,6 +5,7 @@ import Experience from "./pages/experience";
 import Hobbies from "./pages/hobbies";
 import ProjectDetail from "./pages/project-detail";
 import Navbar from "./components/navbar";
+import { Analytics } from "@vercel/analytics/next"
 
 /**
  * Main App component
@@ -14,6 +15,7 @@ function App() {
   return (
     <Router>
       <Navbar />
+      <Analytics />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/projects" element={<Projects />} />
